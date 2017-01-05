@@ -1,0 +1,35 @@
+<h1>Home</h1>
+
+<div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Day</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Duration</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |event|}}
+    <tr>
+      <td>{{format-dow       event.timezone event.startAt}}</td>
+      <td>{{format-timestamp event.timezone event.startAt}}</td>
+      <td>{{format-timestamp event.timezone event.endAt}}</td>
+      <td>{{format-duration                 event.durationInSeconds}}</td>
+      <td>
+        Edit
+      </td>
+    </tr>
+    {{else}}
+      <tr>
+        <td colspan="5">
+          <p>Start sleeping or do something</p>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

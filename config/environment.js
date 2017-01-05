@@ -2,6 +2,12 @@
 
 module.exports = function(environment) {
   var ENV = {
+    moment: {
+      includeTimezone: '2010-2020',
+      allowEmpty: true,
+      includeLocales: ['en'],
+    },
+
     modulePrefix: 'nofrills-sleep-tracker',
     environment: environment,
     rootURL: '/',
