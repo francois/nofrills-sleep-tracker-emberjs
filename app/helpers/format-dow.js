@@ -6,7 +6,7 @@ export function formatDow(params) {
   let timestamp = params[1];
 
   let ts = moment(timestamp);
-  return ts.tz(timezone).format("dd");
+  return ts.tz(timezone).format("ddd");
 }
 
 export default Ember.Helper.helper(formatDow);
