@@ -40,6 +40,6 @@ let events = [
 
 export default Ember.Route.extend({
   model() {
-    return events;
+    return events.sortBy("startAt").reverse();
   }
 });
