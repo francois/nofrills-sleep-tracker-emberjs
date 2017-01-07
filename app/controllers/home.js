@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  averageNapDuration: Ember.computed('model', function() {
+  averageNapDuration: Ember.computed('model.@each.durationInSeconds', function() {
     let napEvents = this.get('model').
       filter(function(event) { return event.type === 'nap'; });
 
@@ -12,7 +12,7 @@ export default Ember.Controller.extend({
     return totalDuration / napEvents.length;
   }),
 
-  averageNightDuration: Ember.computed('model', function() {
+  averageNightDuration: Ember.computed('model.@each.durationInSeconds', function() {
     let nightEvents = this.get('model').
       filter(function(event) { return event.type === 'night'; });
 
