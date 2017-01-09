@@ -20,11 +20,26 @@ export default Ember.Controller.extend({
       this.set('startAt', new Date());
     },
 
-    didAwaken: function() {
-      this.set('state', 'awake');
-    },
+    didAwaken: function(type) {
+      let newEvents = this.get('model').slice();
+      let timezone = this.get('timezone') || 'America/Montreal';
+      let startAt = this.get('startAt').getTime();
+      let endAt = new Date().getTime();
 
-    didCancel: function() {
+      let newEvent = {
+        durationInSeconds: Math.round((endAt - startAt) / 1000),
+        startAt: startAt,
+        endAt: endAt,
+        timezone: timezone,
+        type: type,
+      };
+
+      console.log('events before %o', newEvents.length);
+      console.log('newEvent: %o', newEvent);
+      newEvents.push(newEvent);
+      console.log('events after: %o', newEvents.length);
+
+      this.set('model', newEvents);
       this.set('state', 'awake');
       this.set('startAt', undefined);
     },
@@ -32,7 +47,6 @@ export default Ember.Controller.extend({
     didReset: function() {
       this.set('state', 'awake');
       this.set('startAt', undefined);
-      console.log("reset");
     },
   }
 });

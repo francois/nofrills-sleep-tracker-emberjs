@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model as |event|}}
+    {{#each events as |event|}}
     <tr>
       <td>{{format-dow       event.timezone event.startAt}}</td>
       <td>{{format-timestamp event.timezone event.startAt}}</td>
