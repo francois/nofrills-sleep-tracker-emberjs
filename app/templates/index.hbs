@@ -1,16 +1,9 @@
 <div class="small-12 columns">
   {{#if isSleeping}}
-    <h3>state sleeping</h3>
     {{state-sleeping startAt=startAt didAwaken=(action "didAwaken" "night") didCancel=(action "didReset") timezone=timezone}}
   {{else if isNapping}}
-    <h3>state napping</h3>
     {{state-napping startAt=startAt didAwaken=(action "didAwaken" "nap") didCancel=(action "didReset") timezone=timezone}}
   {{else}}
-    <h3>state awake</h3>
     {{state-awake events=model didStartSleeping=(action "didStartSleeping") didStartNapping=(action "didStartNapping") didAwaken=(action "didAwaken")}}
   {{/if}}
-</div>
-<div class="small-12 columns">
-  <p>current state: {{state}}</p>
-  <button class="button alert tiny" {{action "didReset"}}>Reset</button>
 </div>
