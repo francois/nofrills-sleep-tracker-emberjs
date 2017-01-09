@@ -2,6 +2,14 @@
 
 module.exports = function(environment) {
   var ENV = {
+    firebase: {
+      apiKey: 'AIzaSyDIH68L5cGGjTLXFiu7xyyGEVQARijaRAw',
+      authDomain: 'nofrills-sleep-tracker.firebaseapp.com',
+      databaseURL: 'https://nofrills-sleep-tracker.firebaseio.com',
+      storageBucket: 'nofrills-sleep-tracker.appspot.com',
+      messagingSenderId: '1094997215952',
+    },
+
     moment: {
       includeTimezone: '2010-2020',
       allowEmpty: true,

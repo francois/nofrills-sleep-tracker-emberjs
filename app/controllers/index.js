@@ -21,25 +21,19 @@ export default Ember.Controller.extend({
     },
 
     didAwaken: function(type) {
-      let newEvents = this.get('model').slice();
       let timezone = this.get('timezone') || 'America/Montreal';
       let startAt = this.get('startAt').getTime();
       let endAt = new Date().getTime();
 
       let newEvent = {
-        durationInSeconds: Math.round((endAt - startAt) / 1000),
-        startAt: startAt,
-        endAt: endAt,
         timezone: timezone,
         type: type,
+        startAt: startAt,
+        endAt: endAt,
       };
 
-      console.log('events before %o', newEvents.length);
-      console.log('newEvent: %o', newEvent);
-      newEvents.push(newEvent);
-      console.log('events after: %o', newEvents.length);
+      this.get('store').createRecord('event', newEvent).save();
 
-      this.set('model', newEvents);
       this.set('state', 'awake');
       this.set('startAt', undefined);
     },
