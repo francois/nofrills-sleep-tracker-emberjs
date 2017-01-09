@@ -32,6 +32,7 @@ export default Ember.Controller.extend({
         endAt: endAt,
       };
 
+      // TODO: replace hard-coded 'event' with `events:UUID`, in order to implement multi-tenanting
       this.get('store').createRecord('event', newEvent).save();
 
       this.set('state', 'awake');
