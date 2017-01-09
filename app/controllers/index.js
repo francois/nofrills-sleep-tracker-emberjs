@@ -1,25 +1,38 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  averageNapDuration: Ember.computed('model.@each.durationInSeconds', function() {
-    let napEvents = this.get('model').
-      filter(function(event) { return event.type === 'nap'; });
-
-    let totalDuration = napEvents.
-      map(function(event) { return event.durationInSeconds; }).
-      reduce(function(a, b) { return a + b; }, 0);
-
-    return totalDuration / napEvents.length;
+  isNapping: Ember.computed('state', function() {
+    return this.get('state') === 'napping';
   }),
 
-  averageNightDuration: Ember.computed('model.@each.durationInSeconds', function() {
-    let nightEvents = this.get('model').
-      filter(function(event) { return event.type === 'night'; });
-
-    let totalDuration = nightEvents.
-      map(function(event) { return event.durationInSeconds; }).
-      reduce(function(a, b) { return a + b; }, 0);
-
-    return totalDuration / nightEvents.length;
+  isSleeping: Ember.computed('state', function() {
+    return this.get('state') === 'sleeping';
   }),
+
+  actions: {
+    didStartNapping: function() {
+      this.set('state', 'napping');
+      this.set('startAt', new Date());
+    },
+
+    didStartSleeping: function() {
+      this.set('state', 'sleeping');
+      this.set('startAt', new Date());
+    },
+
+    didAwaken: function() {
+      this.set('state', 'awake');
+    },
+
+    didCancel: function() {
+      this.set('state', 'awake');
+      this.set('startAt', undefined);
+    },
+
+    didReset: function() {
+      this.set('state', 'awake');
+      this.set('startAt', undefined);
+      console.log("reset");
+    },
+  }
 });

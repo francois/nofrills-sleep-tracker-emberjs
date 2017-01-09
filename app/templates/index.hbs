@@ -1,52 +1,16 @@
 <div class="small-12 columns">
-  <h1>Prepare to sleep</h1>
-  <div class="row">
-    <div class="small-6 columns">
-      <button class="button small">Start Napping</button>
-    </div>
-    <div class="small-6 columns">
-      <button class="button small">Start Sleeping</button>
-    </div>
-  </div>
-
-  <table>
-    <col width="1">
-    <col width="1">
-    <col width="1">
-    <col width="1">
-    <thead>
-      <tr>
-        <th>DoW</th>
-        <th>Start</th>
-        <th>Wake</th>
-        <th>Duration</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each model as |event|}}
-      <tr>
-        <td>{{format-dow       event.timezone event.startAt}}</td>
-        <td>{{format-timestamp event.timezone event.startAt}}</td>
-        <td>{{format-timestamp event.timezone event.endAt}}</td>
-        <td class="duration">
-          {{#link-to 'analytics'}}
-          {{format-duration event.durationInSeconds}}
-          {{/link-to}}
-        </td>
-      </tr>
-      {{else}}
-      <tr>
-        <td colspan="4">
-          <p>Start sleeping or do something</p>
-        </td>
-      </tr>
-      {{/each}}
-    </tbody>
-    <tfoot>
-      <tr>
-        <td scope="row" colspan="3">Average night</td>
-        <td class="duration">{{format-duration averageNightDuration}}</td>
-      </tr>
-    </tfoot>
-  </table>
+  {{#if isSleeping}}
+    <h3>state sleeping</h3>
+    {{state-sleeping startAt=startAt didAwaken=(action "didAwaken") didCancel=(action "didCancel")}}
+  {{else if isNapping}}
+    <h3>state napping</h3>
+    {{state-napping startAt=startAt didAwaken=(action "didAwaken") didCancel=(action "didCancel")}}
+  {{else}}
+    <h3>state awake</h3>
+    {{state-awake events=model didStartSleeping=(action "didStartSleeping") didStartNapping=(action "didStartNapping") didAwaken=(action "didAwaken")}}
+  {{/if}}
+</div>
+<div class="small-12 columns">
+  <p>state: {{state}}</p>
+  <button class="button alert tiny" {{action "didReset"}}>Reset</button>
 </div>
