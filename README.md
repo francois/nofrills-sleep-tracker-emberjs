@@ -9,5 +9,7 @@ git clone https://github.com/francois/nofrills-sleep-tracker-emberjs
 cd nofrills-sleep-tracker-emberjs
 yarn install
 bower install
-ember serve
+./node_modules/ember-cli/bin/ember serve
 ```
+
+Then, visit [http://localhost:4200/](http://localhost:4200/).
